@@ -103,9 +103,9 @@ try:
         return flask.render_template("formularioV.html")
 
 
-    @app.route('/voluntarioAvl')
-    def formularioVl():
-        return flask.render_template("voluntarioavl.html")
+    @app.route('/formSendGeneric')
+    def formSendGeneric():
+        return flask.render_template("formSendGeneric.html")
 
 
     @app.route('/voluntarios')
@@ -128,6 +128,51 @@ try:
                         return flask.render_template("voluntariosLista.html", data=data)
                 else:
                     return flask.redirect("/erro")
+
+
+    @app.route('/estoque')
+    def estoque():
+        if cok is None:
+            return flask.redirect("/login")
+
+        else:
+            with sqlite3.connect(configurationsInfoTXT['data']) as conn:
+                c = conn.cursor()
+
+                c.execute('SELECT * FROM user WHERE access = ? AND email=?', (3, cok[0]))
+                acc = c.fetchone()
+
+                if acc is not None:
+                    with sqlite3.connect(configurationsInfoTXT['data']) as conn:
+                        c = conn.cursor()
+                        c.execute("SELECT cesta_id, alimentos, status, COALESCE(user_id, 'Nenhum') FROM cesta")
+                        data = c.fetchall()
+
+                        return flask.render_template("estoque.html", data=data)
+                else:
+                    return flask.redirect("/erro")
+
+
+    @app.route('/estoqueAdd')
+    def estoqueAdd():
+        if cok is None:
+            return flask.redirect("/login")
+
+        else:
+            with sqlite3.connect(configurationsInfoTXT['data']) as conn:
+                c = conn.cursor()
+                c.execute('SELECT * FROM user WHERE access = ? AND email=?', (3, cok[0]))
+                acc = c.fetchone()
+
+                if acc is not None:
+                    return flask.render_template("estoqueAdd.html")
+                else:
+                    return flask.redirect("/erro")
+
+
+    @app.route('/formRenda')
+    def formRenda():
+        return flask.render_template("rendaForm.html")
 
 
     # Form send
@@ -241,7 +286,7 @@ try:
         eM = flask.request.form.get('email')
         ass = flask.request.form.get('ass')
 
-        s = f'Ticket de Ajuda {datetime.date.today()}'
+        s = f'Ticket de Ajuda: {datetime.date.today()}'
         b = f"""
             🌱🌿  Obrigado por nos contatar! iremos fazer o possivel sobre o assunto 🌻☀
 
@@ -380,12 +425,100 @@ try:
             c = conn.cursor()
 
             for key, value in flask.request.form.items():
-                print("Processing:", key, value)
                 if key.startswith('status_'):
                     uid = key.split('_')[1]
 
                     c.execute('UPDATE voluntario SET tipo = ? WHERE user_id = ?', (value, uid))
             return flask.redirect("/voluntarios")
+
+
+    @app.route('/estoque/delete', methods=['POST'])
+    def estoqueDelete():
+        idC = flask.request.form['id']
+
+        with sqlite3.connect(configurationsInfoTXT['data']) as conn:
+            c = conn.cursor()
+            c.execute("DELETE FROM cesta WHERE cesta_id = ?", idC)
+
+        return flask.redirect("/estoque")
+
+
+    @app.route('/estoqueAdd/send', methods=['POST'])
+    def estoqueSend():
+        rec = flask.request.form['receptor']
+        alim = flask.request.form['alim']
+        stat = flask.request.form['status']
+
+        def addStoque(alime, stats, nome=None):
+            with sqlite3.connect(configurationsInfoTXT['data']) as conn:
+                c = conn.cursor()
+                c.execute("INSERT INTO cesta (alimentos, status, user_id) VALUES (?,?,?)", (alime, stats, nome))
+
+        if rec == '':
+            addStoque(alim, stat)
+            return flask.redirect('/estoque')
+
+        else:
+            with sqlite3.connect(configurationsInfoTXT['data']) as conn:
+                c = conn.cursor()
+                c.execute("SELECT * FROM user WHERE nome = ?", (rec,))
+                r = c.fetchone()
+
+                if r is not None:
+                    addStoque(alim, stat, r[0])
+                    return flask.redirect('/estoque')
+                else:
+                    return flask.redirect(f'/estoqueAdd?error=1&n={rec}')
+
+
+    @app.route('/renda/send', methods=['POST'])
+    def formRendaSend():
+        if cok is not None:
+            ren = flask.request.form['renda']
+            dep = flask.request.form['dependentes']
+            oR = flask.request.form['outra_renda']
+            dP = flask.request.form['despesa_principal']
+            gA = flask.request.form['gasto_alimentacao']
+            aux = flask.request.form['auxilio']
+
+            def email():
+                eS = 'hortelaurbana@gmail.com'
+                eP = 'qyyq cdht mkzv eguy'
+                s = f'Formulario de renda {cok[0]}'
+                b = f"""
+                            🌱🌿  Copia da resposta do formulario de renda 🌻☀
+
+                            Respostas:     
+
+                            Renda: {ren}
+                            Dependentes: {dep}
+                            Outras Rendas: {oR}
+                            Despesas Principais: {dP}
+                            Gastos da alimentação: {gA}
+                            Auxilio: {aux}
+                        """
+
+                em = EmailMessage()
+                em['From'] = eS
+                em['To'] = eS
+                em['Subject'] = s
+                em.set_content(b)
+
+                c = ssl.create_default_context()
+
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=c) as smtp:
+                    smtp.login(eS, eP)
+                    smtp.sendmail(eS, eS, em.as_string())
+
+            # Recreate connection each time to prevent threading issues
+            with sqlite3.connect(configurationsInfoTXT['data']) as conn:
+                c = conn.cursor()
+                c.execute('UPDATE user SET access = ? WHERE email = ?', (1, cok[0]))
+                email()
+
+                return flask.redirect('/formSendGeneric')
+        else:
+            return flask.redirect('/login')
 
 
     if __name__ == '__main__':

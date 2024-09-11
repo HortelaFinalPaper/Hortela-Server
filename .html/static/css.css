@@ -300,6 +300,9 @@ a{color: #244031}
 	border: 2px #244031 solid;
 	border-radius: 5px;
 }
+.forminputTextA{
+	height: 250px
+}
 .fitFormProf{
 	width: auto;
 }
@@ -537,6 +540,12 @@ a{color: #244031}
 	text-overflow: ellipsis;
 	width: 120px;
 }
+.medio{
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 220px;
+}
 .entryScroll{
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -548,6 +557,55 @@ a{color: #244031}
 .entrytop{margin-bottom: 0;}
 .entrybottom{margin-top: 0;}
 .selectClick{transition: 0s; margin-top: -10px;}
+.cestaEntry{
+	display: flex;
+    align-items: center;
+	
+	height: 80px;
+	width: 99%;
+	
+	border: solid 4px #223c2e;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 0;
+	
+    overflow: hidden;
+}
+.cestaEntry div{
+    display: grid;
+	
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+	gap: 10px;
+	
+	margin-left: 10px;
+}
+.cestaEntry button{
+    width: 150px;
+    height: 60px;
+}
+.cestaEntry input{
+	display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+.estoqueForm{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+	
+    align-items: center;
+}
+.genericflex-start{
+	display: flex;
+	align-items: flex-start;
+}
 
 #pixBS{width: fit}
 #indexHeaderButton{
