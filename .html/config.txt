@@ -1,5 +1,10 @@
 {
   "ip": "127.0.0.1",
   "port": 5000,
-  "data": "dbHort.db"
+  "data": "dbHort.db",
+  "host": "db8071.public.databaseasp.net",
+  "user": "db8071",
+  "password": "20anehort",
+  "database": "db8071",
+  "portdb": 1433
 }

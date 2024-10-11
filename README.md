@@ -1,6 +1,6 @@
 ![logoWideS](https://github.com/user-attachments/assets/3e728d46-b35c-4bbd-a1b1-568dafbca69d)
 
-![Static Badge](https://img.shields.io/badge/Version-1.11.4-white?labelColor=%23ff&color=%235aa02c)
+![Static Badge](https://img.shields.io/badge/Version-2.1-white?labelColor=%23ff&color=%235aa02c)
 
 
 Bug founded? Suggestion? Check out the [form!](https://docs.google.com/forms/d/e/1FAIpQLSe7E4BD5KrTsHNDCq1aUhnUfxtI9J1ATuiD2UITPPdPbDUxwA/viewform)
@@ -20,7 +20,7 @@ Welcome to the Finals Paper Server repository! This project is a web application
 
 # 🦾Technologies Used
 - **🐍Python**: The core programming language used for server-side logic and scripting.
-- **💽SQLite3**: A lightweight and serverless relational database for efficient data storage.
+- **💽Pyodbc**: PyODBC is a Python library that allows for seamless connectivity and interaction with ODBC.
 - **📡Flask**: A Python web framework that powers the server-side functionality and routing.
 - **🛡️SSL**: SSL protection in order to send e-mail's safely.
 - **📝SMTP**: Alongside with SSL, using SMTP to send e-mails for you.
