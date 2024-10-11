@@ -1,0 +1,95 @@
+<html lang="pt-br">
+	<head>
+		<title>Hortelã - Horta Comunitaria</title>
+		<link href="./static/css.css" rel="stylesheet">
+		<link href="./static/image/icoi.ico" rel="icon">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<a href="index" class="OnMenuHeaderGeneral floatGenericLeft" id="indexHeaderButton">
+				<div class="imgContainerMenuHeader">
+					<img src="./static/image/headerB.png" class="flip marginright20px"></img>
+					<img src="./static/image/icop.png"></img>
+					<img src="./static/image/headerB.png" class="marginleft20px"></img>
+					
+					<img src="./static/image/logoWide.png" class="marginleft150px"></img>
+				</div>
+			</a>
+			
+			<div class="OnMenuHeaderGeneral floatGenericRight flexCenterVertical marginRight150p">
+				<a href="profile" class="floatLeft flexCenterVertical">
+					<span class="backgroundImageSpan backgroundImageProfile"></span>
+				</a>
+				<a href="profile/logout" class="buttonLikeSize color3a7c4f linkNullS smallHoverLikeButton">
+					Sair da conta
+				</a>
+			</div>
+		</header>
+		<!-- This header has FIXED profile/login things -->
+		
+		<main>
+			<div class="voluntarioDiv">
+				<div class="voluntarioDivHeader">
+					<h1>-<u>Cestas da Hortelã - ONG:</u></h1>
+
+					<div>
+						<button type="button" onClick="window.location.href='/estoqueAdd'" class="submitButtomForm">Adicionar ao Estoque</button>
+					</div>
+				</div>
+				
+				<div class="entryScroll">
+					{% for entry in data %}
+						<form class="cestaEntry" action="estoque/delete" method="post">
+							<div>
+								<h2 class="medio entrytop">ID: {{ entry[0] }}</h2>
+								<h2 class="maior entrytop">Conteúdo: {{ entry[1] }}</h2>
+								<h2 class="medio entrybottom">Status: {{ entry[2] }}</h2>
+								<h2 class="maior entrybottom">Carente ID: {{ entry[3] }}</h2>
+							</div>
+							
+							<button type="submit" class="submitButtomForm warningbutton">Apagar</button>
+							<!-- Save id -->
+							<input name="id" type="text" style="display: none" value="{{ entry[0] }}"></input>
+						</form>
+					{% endfor %}
+
+				</div>
+			</div>
+		</main>
+		
+		<footer>
+			<div class="footerComp">
+				<h4>Ao acessar e utilizar nosso site você </br>concorda com nossos <a href="/termos.pdf">termos de uso</a></h4>
+			</div>
+			<div class="footerComp">
+				<h4>Ao acessar e utilizar nosso site você </br>concorda com nossos <a href="/termos.pdf">termos de privacidade</a></h4>
+			</div>
+			<div class="footerComp">
+				<h4>Com duvidas? <a href="/contact">Fale Conosco</a></h4>
+			</div>
+			
+			<div class="footerComp">
+				<div class="flexRight">
+					<div class="flexCol">
+						<h4>Instagram:</h4>
+						<a href="">@HortaHortela</a>
+					</div>
+					<div class="flexCol">
+						<h4>Facebook:</h4>
+						<a href="">@HortasHortela</a>
+					</div>
+					<div class="flexCol">
+						<h4>Twitter:</h4>
+						<a href="">@HortelanHortas</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+<!-------
+ ／l、
+（ﾟ､ ｡７
+l、ﾞ~ヽ
+じしf_, )ノ

@@ -1,0 +1,112 @@
+<html>
+	<head>
+		<title>Hortelã - Horta Comunitaria</title>
+		<link href="./static/css.css" rel="stylesheet">
+		<link href="./static/image/icoi.ico" rel="icon">
+	</head>
+	<body onload="validateForm()" >
+		<header>
+			<a href="index" class="OnMenuHeaderGeneral floatGenericLeft" id="indexHeaderButton">
+				<div class="imgContainerMenuHeader">
+					<img src="./static/image/headerB.png" class="flip marginright20px"></img>
+					<img src="./static/image/icop.png"></img>
+					<img src="./static/image/headerB.png" class="marginleft20px"></img>
+					
+					<img src="./static/image/logoWide.png" class="marginleft150px"></img>
+				</div>
+			</a>
+			
+			<div class="OnMenuHeaderGeneral floatGenericRight">
+				<a href="index" id="genericfitheader">
+					<div class="generalIconBText">
+						<img src="./static/image/megaphone.png"></img>
+					</div>
+					<a href="/contact" class="generalTextLink354719NoResize">Fale Conosco</a>
+				</a>
+			</div>
+		</header>
+		<!--This type of header doesn't have login-->
+		
+		<main>
+			<div class="genericAlignCenter flexRight flexCenterVertical">
+				<div class="formDiv">
+					<div class="genericFlexTop">
+						<img src="./static/image/icop.png" class="smallicoresize"></img>
+						<h2 class="normalTextNobBo">Formulario de renda</h2>
+					</div>
+					
+					<form class="genericFlexTop genericflex-start" action="/renda/send" method="POST">
+						
+						<label>1. Qual é a sua faixa de renda mensal?</label><br>
+						<div><input type="radio" name="renda" value="Até R$ 1.500" required> Até R$ 1.500</div>
+						<div><input type="radio" name="renda" value="R$ 1.501 - R$ 3.000" required> R$ 1.501 - R$ 3.000</div>
+						<div><input type="radio" name="renda" value="R$ 3.001 - R$ 5.000" required> R$ 3.001 - R$ 5.000</div>
+						<div><input type="radio" name="renda" value="Acima de R$ 5.000" required> Acima de R$ 5.000</div><br>
+						
+						<label>2. Quantas pessoas dependem da sua renda?</label><br>
+						<div><input type="radio" name="dependentes" value="Nenhuma" required> Nenhuma</div>
+						<div><input type="radio" name="dependentes" value="1-2 pessoas" required> 1-2 pessoas</div>
+						<div><input type="radio" name="dependentes" value="3-4 pessoas" required> 3-4 pessoas</div>
+						<div><input type="radio" name="dependentes" value="5 ou mais pessoas" required> 5 ou mais pessoas</div><br>
+						
+						<label>3. Você possui outras fontes de renda além do seu trabalho principal?</label><br>
+						<div><input type="radio" name="outra_renda" value="Não" required> Não</div>
+						<div><input type="radio" name="outra_renda" value="Sim, uma fonte extra" required> Sim, uma fonte extra</div>
+						<div><input type="radio" name="outra_renda" value="Sim, mais de uma fonte extra" required> Sim, mais de uma fonte extra</div><br>
+						
+						<label>4. Qual a sua principal despesa mensal?</label><br>
+						<div><input type="radio" name="despesa_principal" value="Aluguel" required> Aluguel</div>
+						<div><input type="radio" name="despesa_principal" value="Alimentação" required> Alimentação</div>
+						<div><input type="radio" name="despesa_principal" value="Contas básicas" required> Contas básicas (água, luz, etc.)</div>
+						<div><input type="radio" name="despesa_principal" value="Educação" required> Educação</div>
+						<div><input type="radio" name="despesa_principal" value="Saúde" required> Saúde</div><br>
+						
+						<label>5. Quanto da sua renda mensal é destinado a alimentação?</label><br>
+						<div><input type="radio" name="gasto_alimentacao" value="Menos de 30%" required> Menos de 30%</div>
+						<div><input type="radio" name="gasto_alimentacao" value="Entre 30% e 50%" required> Entre 30% e 50%</div>
+						<div><input type="radio" name="gasto_alimentacao" value="Mais de 50%" required> Mais de 50%</div><br>
+						
+						<label>6. Você já recebeu algum tipo de auxílio ou benefício social nos últimos 6 meses?</label><br>
+						<div><input type="radio" name="auxilio" value="Sim" required> Sim</div>
+						<div><input type="radio" name="auxilio" value="Não" required> Não</div><br>
+						
+						<input type="submit" value="Enviar" class="submitButtomForm">
+				</div>
+			</div>
+		</main>
+		
+		<footer>
+			<div class="footerComp">
+				<h4>Ao acessar e utilizar nosso site você </br>concorda com nossos <a href="/termos.pdf">termos de uso</a></h4>
+			</div>
+			<div class="footerComp">
+				<h4>Ao acessar e utilizar nosso site você </br>concorda com nossos <a href="/termos.pdf">termos de privacidade</a></h4>
+			</div>
+			<div class="footerComp">
+				<h4>Com duvidas? <a href="/contact">Fale Conosco</a></h4>
+			</div>
+			
+			<div class="footerComp">
+				<div class="flexRight">
+					<div class="flexCol">
+						<h4>Instagram:</h4>
+						<a href="">@HortaHortela</a>
+					</div>
+					<div class="flexCol">
+						<h4>Facebook:</h4>
+						<a href="">@HortasHortela</a>
+					</div>
+					<div class="flexCol">
+						<h4>Twitter:</h4>
+						<a href="">@HortelanHortas</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+<!-------
+ ／l、
+（ﾟ､ ｡７
+l、ﾞ~ヽ
+じしf_, )ノ

@@ -24,6 +24,9 @@ function editActive(){
 	if(tel.value == "Não Definido"){
 		tel.value = ""
 	};
+	if(cpf.value == "Não Definido"){
+		cpf.value = ""
+	};
 	
 	nome.disabled = false;
 	email.disabled = false;
@@ -35,12 +38,16 @@ function editActive(){
 function correctEmpty(){
 	var end = document.getElementById("end");
 	var tel = document.getElementById("tel");
+	var cpf = document.getElementById("cpf");
 	
 	if(end.value == ""){
 		end.value = "Não Definido"
 	};
 	if(tel.value == ""){
 		tel.value = "Não Definido"
+	};
+	if(cpf.value == ""){
+		cpf.value = "Não Definido"
 	};
 };
 
@@ -112,3 +119,27 @@ function validateForm(){
 		p.style.border = ("solid 2px red");
 	}
 };
+
+function validadeCredentials(){
+	var accessValue = document.getElementById("accessValue").textContent;
+	
+	// Admin 3
+	// Funcionario 2
+	// Carente 1
+	// Nada 0
+	if (accessValue == 3){
+		var volunButton = document.getElementById("volunButton")
+		volunButton.style.display = "block";
+	};
+	if (accessValue >= 2){
+		var calenButton = document.getElementById("calenButton")
+		var estoqButton = document.getElementById("estoqButton")
+		calenButton.style.display = "block";
+		estoqButton.style.display = "block";
+	};
+}
+
+function onLoadHandler(){
+	validadeCredentials();
+	validateForm();
+}

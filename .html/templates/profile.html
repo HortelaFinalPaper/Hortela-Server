@@ -1,11 +1,14 @@
 <html>
 	<head>
-		<title>Hortelã - Horta Urbana</title>
+		<title>Hortelã - Horta Comunitaria</title>
 		<link href="./static/css.css" rel="stylesheet">
 		<link href="./static/image/icoi.ico" rel="icon">
 		<script src="./static/jsProf.js"></script>
 	</head>
-	<body onLoad="validateForm()">
+	<body onLoad="onLoadHandler()">
+		<!-- Pass value to JS -->
+		<p id="accessValue" style="display:none">{{ u[6] }}</p>
+	
 		<header>
 			<a href="index" class="OnMenuHeaderGeneral floatGenericLeft" id="indexHeaderButton">
 				<div class="imgContainerMenuHeader">
@@ -33,40 +36,50 @@
 				<div class="flexC2 fitFormProf">
 					<img src="./static/image/profile.png" class="transformS0 borderRoundYeah"></img>
 					
-					<form class="margintop50" action="profile/send" method="post" target="_self" onsubmit="correctEmpty()">
-						<input type="text" value="{{u[0]}}" name="Oemail" style="display: none"></input>
-						<!-- Save old email for the server -->
-						
-						<input type="text" class="fontCourier textBold width100 fakeInputDisabled fontSize25p formInput marginBot5p" placeholder="Nome" value="{{u[2]}}" id="nome" name="name" required disabled ></input>
-						</br>
-						<input type="email" class="fontCourier textNormal width100 fakeInputDisabled fontSize20p formInput" placeholder="E-mail" value="{{u[0]}}" id="email" name="email" required disabled></input>
-						</br></br>
-						
-						<h4 type="text" class="fontCourier textNormal marginTop0 flexCenterVertical">
-							<span class="backgroundImageSpan backgroundImagePin floatLeft">‎</span>
+					<div class="flexCenterVertical">
+						<form class="margintop50" action="profile/send" method="post" target="_self" onsubmit="correctEmpty()">
+							<input type="text" value="{{u[0]}}" name="Oemail" style="display: none"></input>
+							<!-- Save old email for the server -->
 							
-							<input type="text" class="fakeInputDisabled	widthAuto color3a7c4f fontSize16p formInput flexFit1" placeholder="Cidade, Bairro, Rua, Numero" value="{{u[5]}}" id="end" name="end" disabled></input>
-						</h4>
+							<input type="text" class="fontCourier textBold width100 fakeInputDisabled fontSize25p formInput marginBot5p" placeholder="Nome" value="{{u[2]}}" id="nome" name="name" required disabled ></input>
+							</br>
+							<input type="email" class="fontCourier textNormal width100 fakeInputDisabled fontSize20p formInput" placeholder="E-mail" value="{{u[0]}}" id="email" name="email" required disabled></input>
+							</br></br>
 							
-						<h4 type="text" class="fontCourier textNormal marginTop0 flexCenterVertical">
-							<span class="backgroundImageSpan backgroundImagePhone floatLeft">‎</span>
+							<h4 class="fontCourier textNormal marginTop0 flexCenterVertical">
+								<span class="backgroundImageSpan backgroundImagePin floatLeft">‎</span>
+								
+								<input type="text" class="fakeInputDisabled	widthAuto color3a7c4f fontSize16p formInput flexFit1" placeholder="Cidade, Bairro, Rua, Numero" value="{{u[4]}}" id="end" name="end" disabled></input>
+							</h4>
+								
+							<h4 class="fontCourier textNormal marginTop0 flexCenterVertical">
+								<span class="backgroundImageSpan backgroundImagePhone floatLeft">‎</span>
+								
+								<input type="text" class="fakeInputDisabled	widthAuto color3a7c4f fontSize16p formInput flexFit1" placeholder="EX: 11 1234-5678" value="{{u[5]}}" id="tel" pattern="[0-9]{2} [0-9]{4,5}-[0-9]{4}" name="tel" disabled></input>
+							</h4>
 							
-							<input type="text" class="fakeInputDisabled	widthAuto color3a7c4f fontSize16p formInput flexFit1" placeholder="EX: 11 1234-5678" value="{{u[4]}}" id="tel" pattern="[0-9]{2} [0-9]{4,5}-[0-9]{4}" name="tel" disabled></input>
-						</h4>
-						
-						<h4 type="text" class="fontCourier textNormal marginTop0 flexCenterVertical">
-							<span class="backgroundImageSpan backgroundImageId floatLeft">‎</span>
+							<h4 class="fontCourier textNormal marginTop0 flexCenterVertical">
+								<span class="backgroundImageSpan backgroundImageId floatLeft">‎</span>
+								
+								<input type="text" class="fakeInputDisabled	widthAuto color3a7c4f fontSize16p formInput flexFit1" placeholder="12345678910" value="{{u[3]}}" id="cpf" pattern="^\d{11}$|^$" name="cpf" disabled></input>
+							</h4>
 							
-							<input type="text" class="fakeInputDisabled	widthAuto color3a7c4f fontSize16p formInput flexFit1" placeholder="12345678910" value="{{u[3]}}" id="cpf" pattern="\d{11}" name="cpf" disabled></input>
-						</h4>
+							<button type="button" class="submitButtomForm marginLeft18" onClick="editActive()" id="edit">Editar Perfil</button>
+							<button type="submit" class="submitButtomForm marginLeft18" id="save" style="display:none">Salvar Perfil</button>
+							</br></br>	
+							
+							<button type="button" onclick="popUp()" class="submitButtomForm marginLeft18 warningbutton smallButtom" id="delete" style="display:none">Apagar Conta</button>
+							
+						</form>
+						<!-- Admin things -->
+						<button id="volunButton" type="button" onClick="window.location='/voluntarios';" class="submitButtomForm marginLeft18" style="display: none">Voluntarios</button>
+						<!-- Voluntary things -->
+						<button id="calenButton" type="button" onClick="window.location='/calendario';" class="submitButtomForm marginLeft18" style="display: none">Calendario</button>
+						</br></br></br>
+						<button id="estoqButton" type="button" onClick="window.location='/estoque';" class="submitButtomForm marginLeft18" style="display: none">Estoque</button>
 						
-						<button type="button" class="submitButtomForm marginLeft18" onClick="editActive()" id="edit">Editar Perfil</button>
-						<button type="submit" class="submitButtomForm marginLeft18" id="save" style="display:none">Salvar Perfil</button>
-						</br></br>	
 						
-						<button type="button" onclick="popUp()" class="submitButtomForm marginLeft18 warningbutton smallButtom" id="delete" style="display:none">Apagar Conta</button>
-						
-					</form>
+					</div>
 					<!-- Delete Account Things -->
 					<div class="popUpBack" id="popUpB">
 						<form class="popUp width500p heightAuto leftText radius10p" id="popUpWindow" action="profile/dltProf" target="_self" method="post">
@@ -98,10 +111,10 @@
 		
 		<footer>
 			<div class="footerComp">
-				<h4>Ao acessar e utilizar nosso site você </br>concorda com nossos <a href="/termos">termos de uso</a></h4>
+				<h4>Ao acessar e utilizar nosso site você </br>concorda com nossos <a href="/termos.pdf">termos de uso</a></h4>
 			</div>
 			<div class="footerComp">
-				<h4>Ao acessar e utilizar nosso site você </br>concorda com nossos <a href="/termos">termos de privacidade</a></h4>
+				<h4>Ao acessar e utilizar nosso site você </br>concorda com nossos <a href="/termos.pdf">termos de privacidade</a></h4>
 			</div>
 			<div class="footerComp">
 				<h4>Com duvidas? <a href="/contact">Fale Conosco</a></h4>
