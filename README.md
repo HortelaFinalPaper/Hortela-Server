@@ -3,7 +3,7 @@
 ![Static Badge](https://img.shields.io/badge/Version-2.2.1-white?labelColor=%23ff&color=%235aa02c)
 
 
-Bug founded? Suggestion? Check out the [form!](https://docs.google.com/forms/d/e/1FAIpQLSe7E4BD5KrTsHNDCq1aUhnUfxtI9J1ATuiD2UITPPdPbDUxwA/viewform)
+Bug found? Suggestion? Check out the [form!](https://docs.google.com/forms/d/e/1FAIpQLSe7E4BD5KrTsHNDCq1aUhnUfxtI9J1ATuiD2UITPPdPbDUxwA/viewform)
 
 # Overview
 Welcome to the Finals Paper Server repository! This project is a web application built using Python, SQLite3, and Flask. It was developed for a *local web server*.
