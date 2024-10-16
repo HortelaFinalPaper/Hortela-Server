@@ -1,4 +1,4 @@
-![logoWideS](.html/static/image/logoWide.png)
+![logoWideS](.html/static/image/logoWideS.png)
 
 ![Static Badge](https://img.shields.io/badge/Version-2.2.1-white?labelColor=%23ff&color=%235aa02c)
 
