@@ -16,7 +16,10 @@ try:
 
     basePath = os.getcwd()
     app = flask.Flask(__name__, template_folder=os.path.join(basePath, 'templates'), static_folder=os.path.join(basePath, 'static'))
+
     configurationsInfoTXT = json.load(open("config.txt"))
+    print(f"Version: {configurationsInfoTXT['version']}")
+
     # database get
     def get_db_connection():
         conn_str = (
@@ -50,7 +53,7 @@ try:
 
     @app.route('/termos.pdf')
     def termos():
-        return flask.send_from_directory('static', 'termos.pdf')
+        return flask.send_file(f'{os.path.abspath(os.getcwd())}/static/termos.pdf', as_attachment=True)
     @app.route('/index')
     def index():
         return flask.render_template("index.html", u=cok)
