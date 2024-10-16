@@ -1,4 +1,4 @@
-![logoWideS](https://github.com/user-attachments/assets/3e728d46-b35c-4bbd-a1b1-568dafbca69d)
+![logoWideS](.html/static/image/logoWide.png)
 
 ![Static Badge](https://img.shields.io/badge/Version-2.2.1-white?labelColor=%23ff&color=%235aa02c)
 
