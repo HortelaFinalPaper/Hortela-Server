@@ -94,6 +94,7 @@ try:
     @app.route('/formSendGeneric')
     def formSendGeneric():
         return flask.render_template("formSendGeneric.html")
+    @app.route('/voluntarios')
     def voluntariosLista():
         if cok is None:
             return flask.redirect("/login")
@@ -105,7 +106,7 @@ try:
 
                 if acc is not None:
                     c.execute(
-                        "SELECT u.nome, u.email, u.user_id, u.access, v.tipo FROM users u JOIN voluntario v ON u.user_id = v.user_id;")
+                        "SELECT u.nome, u.email, u.user_id, u.access, v.tipoAtividade FROM users u JOIN voluntario v ON u.user_id = v.user_id;")
                     data = c.fetchall()
 
                     return flask.render_template("voluntariosLista.html", data=data)
@@ -118,11 +119,11 @@ try:
         else:
             with get_db_connection() as conn:
                 c = conn.cursor()
-                c.execute('SELECT * FROM s WHERE access = ? AND email=?', (3, cok[0]))
+                c.execute('SELECT * FROM users WHERE access = ? AND email=?', (3, cok[0]))
                 acc = c.fetchone()
 
                 if acc is not None:
-                    c.execute("SELECT cesta_id, alimentos, status, COALESCE(user_id, 'Nenhum') FROM cesta")
+                    c.execute("SELECT cesta.cesta_id, cesta.status, COALESCE(users.nome, 'Nenhum') FROM cesta LEFT JOIN users ON cesta.user_id = users.user_id")
                     data = c.fetchall()
 
                     return flask.render_template("estoque.html", data=data)
@@ -351,7 +352,7 @@ try:
                 r = cursor.fetchone()
                 idU = r[0]
 
-                cursor.execute("INSERT INTO voluntario (dataDisp, tipo, user_id) VALUES (?,?,?,?)",
+                cursor.execute("INSERT INTO voluntario (dataDisp, tipo, user_id) VALUES (?,?,?)",
                                ("0000-00-00", "avaliando", idU))
                 conn.commit()
 
@@ -383,18 +384,17 @@ try:
     @app.route('/estoqueAdd/send', methods=['POST'])
     def estoqueSend():
         rec = flask.request.form['receptor']
-        alim = flask.request.form['alim']
         stat = flask.request.form['status']
 
-        def addStoque(alime, stats, nome=None):
+        def addStoque(stats, nome=None):
             with get_db_connection() as conn:
                 cursor = conn.cursor()
-                cursor.execute("INSERT INTO cesta (alimentos, status, user_id) VALUES (?,?,?)",
-                               (alime, stats, nome))
+                cursor.execute("INSERT INTO cesta (status, user_id) VALUES (?,?)",
+                               (stats, nome))
                 conn.commit()
 
         if rec == '':
-            addStoque(alim, stat)
+            addStoque(stat)
             return flask.redirect('/estoque')
         else:
             with get_db_connection() as conn:
@@ -403,7 +403,7 @@ try:
                 r = cursor.fetchone()
 
                 if r is not None:
-                    addStoque(alim, stat, r[0])
+                    addStoque(stat, r[0])
                     return flask.redirect('/estoque')
                 else:
                     return flask.redirect(f'/estoqueAdd?error=1&n={rec}')

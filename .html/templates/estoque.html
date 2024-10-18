@@ -42,10 +42,9 @@
 					{% for entry in data %}
 						<form class="cestaEntry" action="estoque/delete" method="post">
 							<div>
-								<h2 class="medio entrytop">ID: {{ entry[0] }}</h2>
-								<h2 class="maior entrytop">Conteúdo: {{ entry[1] }}</h2>
-								<h2 class="medio entrybottom">Status: {{ entry[2] }}</h2>
-								<h2 class="maior entrybottom">Carente ID: {{ entry[3] }}</h2>
+								<h2 class="medio entrytop">Cesta ID: {{ entry[0] }}</h2>
+								<h2 class="medio entrytop">Status: {{ entry[1] }}</h2>
+								<h2 class="maior entrybottom">Carente nome: {{ entry[2] }}</h2>
 							</div>
 							
 							<button type="submit" class="submitButtomForm warningbutton">Apagar</button>
