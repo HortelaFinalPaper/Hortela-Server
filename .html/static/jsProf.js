@@ -132,9 +132,7 @@ function validadeCredentials(){
 		volunButton.style.display = "block";
 	};
 	if (accessValue >= 2){
-		var calenButton = document.getElementById("calenButton")
 		var estoqButton = document.getElementById("estoqButton")
-		calenButton.style.display = "block";
 		estoqButton.style.display = "block";
 	};
 }

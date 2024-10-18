@@ -6,5 +6,6 @@
   "user": "db8071",
   "password": "20anehort",
   "database": "db8071",
-  "portdb": 1433
+  "portdb": 1433,
+  "version": "2.4.6"
 }
