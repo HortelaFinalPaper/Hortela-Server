@@ -1,6 +1,6 @@
 ![logoWideS](.html/static/image/logoWideS.png)
 
-![Static Badge](https://img.shields.io/badge/Version-2.4.6-white?labelColor=%23ff&color=%235aa02c)
+![Static Badge](https://img.shields.io/badge/Version-2.4.9-white?labelColor=%23ff&color=%235aa02c)
 
 
 Bug found? Suggestion? Check out the [form!](https://docs.google.com/forms/d/e/1FAIpQLSe7E4BD5KrTsHNDCq1aUhnUfxtI9J1ATuiD2UITPPdPbDUxwA/viewform)
