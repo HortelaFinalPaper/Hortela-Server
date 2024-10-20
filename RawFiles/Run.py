@@ -378,6 +378,7 @@ try:
         with get_db_connection() as conn:
             cursor = conn.cursor()
             cursor.execute("DELETE FROM cesta WHERE cesta_id = ?", (idC,))
+            cursor.execute("DELETE FROM calendarioDist WHERE cesta_id = ?", (idC,))
             conn.commit()
 
         return flask.redirect("/estoque")
@@ -385,28 +386,33 @@ try:
     def estoqueSend():
         rec = flask.request.form['receptor']
         stat = flask.request.form['status']
+        local = flask.request.form['endereco']
+        data = flask.request.form['data']
 
-        def addStoque(stats, nome=None):
+        if local == "":
+            local = "Rua marte 429, Jardin Tupanci"
+
+        def addStoque(stats, nome):
             with get_db_connection() as conn:
                 cursor = conn.cursor()
-                cursor.execute("INSERT INTO cesta (status, user_id) VALUES (?,?)",
-                               (stats, nome))
+                cursor.execute("INSERT INTO cesta (status, user_id) VALUES (?,?)",(stats, nome))
+
+                cursor.execute("SELECT * FROM cesta WHERE user_id = ?", (nome,))
+                idC = cursor.fetchone()[0]
+
+                cursor.execute("INSERT INTO calendarioDist (local,data, cesta_id) VALUES (?,?,?)",(local, data, idC))
                 conn.commit()
 
-        if rec == '':
-            addStoque(stat)
-            return flask.redirect('/estoque')
-        else:
-            with get_db_connection() as conn:
-                cursor = conn.cursor()
-                cursor.execute("SELECT * FROM users WHERE nome = ?", (rec,))
-                r = cursor.fetchone()
+        with get_db_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users WHERE nome = ?", (rec,))
+            r = cursor.fetchone()
 
-                if r is not None:
-                    addStoque(stat, r[0])
-                    return flask.redirect('/estoque')
-                else:
-                    return flask.redirect(f'/estoqueAdd?error=1&n={rec}')
+            if r is not None:
+                addStoque(stat, r[0])
+                return flask.redirect('/estoque')
+            else:
+                return flask.redirect(f'/estoqueAdd?error=1&n={rec}')
     @app.route('/renda/send', methods=['POST'])
     def formRendaSend():
         if cok is not None:
