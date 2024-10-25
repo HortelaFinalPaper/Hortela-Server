@@ -7,5 +7,5 @@
   "password": "20anehort",
   "database": "db8071",
   "portdb": 1433,
-  "version": "2.4.9"
+  "version": "2.5.7"
 }

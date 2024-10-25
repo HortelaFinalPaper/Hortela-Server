@@ -105,6 +105,9 @@ a{color: #244031}
 	
 	z-index: 1;
 }
+.justify-contentcenter{
+	justify-content: center;
+}
 .displayindex{
 	position: relative;
 	overflow: hidden;
@@ -271,11 +274,15 @@ a{color: #244031}
 	height: 41px;
 }
 .inputFormContainerFamily{
-	width: 72%;
+	width: 80%;
 	
 	text-align: left;
 	margin: auto;
 }
+.profileForm{
+	width: 400px;
+}
+
 .submitButtomForm{
 	width: 70%;
     height: 40px;

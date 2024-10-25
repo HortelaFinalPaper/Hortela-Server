@@ -146,9 +146,9 @@ try:
     @app.route('/formRenda')
     def formRenda():
         return flask.render_template("rendaForm.html")
-    @app.route('/voluntarioCalendario')
-    def calendario():
-        pass
+    @app.route('/voluntarioAvl')
+    def sendGeneric():
+        return flask.render_template("formSendGeneric.html")
 
     @app.route('/profile/dltProf', methods=['POST'])
     def deleteProfile():
@@ -217,7 +217,7 @@ try:
         with get_db_connection() as conn:
             cursor = conn.cursor()
 
-            loadCok(email, cok[1], nome, cpf, tel, end)
+            loadCok(email, cok[1], nome, cpf, end, tel)
 
             if Oemail == email:
                 cursor.execute("UPDATE users SET nome = ?, telefone = ?, endereco = ? WHERE email = ?",
@@ -352,8 +352,8 @@ try:
                 r = cursor.fetchone()
                 idU = r[0]
 
-                cursor.execute("INSERT INTO voluntario (dataDisp, tipo, user_id) VALUES (?,?,?)",
-                               ("0000-00-00", "avaliando", idU))
+                cursor.execute("INSERT INTO voluntario (dataDisp, tipoAtividade, user_id) VALUES (?,?,?)",
+                               (None, "avaliando", idU))
                 conn.commit()
 
                 return flask.redirect("/voluntarioAvl")
@@ -367,7 +367,7 @@ try:
             for key, value in flask.request.form.items():
                 if key.startswith('status_'):
                     uid = key.split('_')[1]
-                    cursor.execute('UPDATE voluntario SET tipo = ? WHERE user_id = ?', (value, uid))
+                    cursor.execute('UPDATE voluntario SET tipoAtividade = ? WHERE user_id = ?', (value, uid))
                     conn.commit()
 
         return flask.redirect("/voluntarios")

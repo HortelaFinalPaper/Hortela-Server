@@ -32,12 +32,12 @@
 		<!-- This header has FIXED profile/login things -->
 		
 		<main>
-			<div class="marginAuto flexRight width500p heightAuto colorBlack flexEnd">
+			<div class="marginAuto flexRight width500p heightAuto colorBlack justify-contentcenter">
 				<div class="flexC2 fitFormProf">
 					<img src="./static/image/profile.png" class="transformS0 borderRoundYeah"></img>
 					
 					<div class="flexCenterVertical">
-						<form class="margintop50" action="profile/send" method="post" target="_self" onsubmit="correctEmpty()">
+						<form class="profileForm margintop50" action="profile/send" method="post" target="_self" onsubmit="correctEmpty()">
 							<input type="text" value="{{u[0]}}" name="Oemail" style="display: none"></input>
 							<!-- Save old email for the server -->
 							
@@ -55,7 +55,7 @@
 							<h4 class="fontCourier textNormal marginTop0 flexCenterVertical">
 								<span class="backgroundImageSpan backgroundImagePhone floatLeft">‎</span>
 								
-								<input type="text" class="fakeInputDisabled	widthAuto color3a7c4f fontSize16p formInput flexFit1" placeholder="EX: 11 1234-5678" value="{{u[5]}}" id="tel" pattern="[0-9]{2} [0-9]{4,5}-[0-9]{4}" name="tel" disabled></input>
+								<input type="text" class="fakeInputDisabled	widthAuto color3a7c4f fontSize16p formInput flexFit1" placeholder="EX: 11 1234-5678" value="{{u[5]}}" id="tel" pattern="[0-9]{2} [0-9]{4,5}[0-9]{4}" name="tel" disabled></input>
 							</h4>
 							
 							<h4 class="fontCourier textNormal marginTop0 flexCenterVertical">
